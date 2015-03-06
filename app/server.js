@@ -11,10 +11,12 @@ var Schema = mongoose.Schema;
 var articleSchema = new Schema ({
   title : {type: String, trim: true, require: true},
   client : {type: String, trim: true, require: true},
-  project_url : {type: String, trim: true, require: true},
-  completion_date : Date,
+  projectUrl : {type: String, trim: true, require: true},
+  imageUrl : String,
+  content : String,
+  completionDate : Date,
   share : String,
-  created_at : {type: Date, default : Date.now}
+  createdAt : {type: Date, default : Date.now}
 });
 
 var Article = mongoose.model('article', articleSchema);
@@ -52,24 +54,62 @@ app.get('/admin', function (req, res) {
   
 });
 
-// post to article template page
+// post to article form page
 app.post('/admin/article/new', function (req, res) {
-  
+
+  var title = req.body["article-title"];
+  var client = req.body["article-client"];
+  var projectUrl = req.body["article-project-url"];
+  var imageUrl = req.body["article-image-url"];
+  var content = req.body["article-content"];
+  var completionDate = req.body["article-completion-date"];
+  var share = req.body["article-share"];
+
+  var article = new Article({
+    title : title,
+    client : client,
+    projectUrl : projectUrl,
+    imageUrl : imageUrl,
+    content : content,
+    completionDate : completionDate,
+    share : share
+  });
+
+  article.save(function (err) {
+    if (err) throw err;
+    res.redirect('/admin/article/list');
+  });
 });
 
-// display new article template
+// display new article form
 app.get('/admin/article/new', function (req, res) {
-  
+  res.render('admin/new');
 });
 
 // display a preview of article
-app.get('/admin/article/')
+app.get('/admin/article/show', function (req, res) {
+  
+});
 
+// list of created articles (view for editing)
+app.get('/admin/article/list', function (req, res) {
+  Article.find(function (err, articles) {
+    if (err) throw err;
+    console.log(articles);
+    res.render('admin/list', {articles : articles});
+  });
+});
 
+// admin edit article
+app.put('/admin/article/:id', function (req, res) {
+  var article_id = req.params.id;
+});
 
-
-
-
+// admin delete article
+app.delete('/admin/article/:id', function (req, res) {
+  var article_id = req.params.id;
+  
+});
 
 
 
