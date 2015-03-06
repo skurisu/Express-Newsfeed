@@ -5,7 +5,7 @@ var methodOverride = require('method-override');
 var app = express();
 
 /* --------- db --------- */
-mongoose.connect('mongodb://localhost/newsfeed');
+mongoose.connect('mongodb://admin:' + process.env.DBPASS + '@ds049661.mongolab.com:49661/newsfeed');
 var Schema = mongoose.Schema;
 
 var articleSchema = new Schema ({
