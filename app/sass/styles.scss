@@ -1,4 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=News+Cycle:400,700);
+@import url(http://fonts.googleapis.com/css?family=Playfair+Display+SC:700);
 
 @import "partials/_resets";
 
@@ -11,7 +12,7 @@ $offwhite: #F9FAF9;
 $black: #000;
 $colorVar: #DDD;
 $grey-mid: #868686;
-$grey-light: #ECECEC;
+$grey-light: #EDEDED;
 
 $theme-dark: $black;
 $theme-medium: $colorVar;
@@ -36,45 +37,81 @@ body {
 
 .container {
   margin: 0 auto;
-  max-width: 900px;
+  max-width: 960px;
 }
 
 h1 {
+  position: relative;
+  font-family: 'Playfair Display SC', Times, serif;
   font-size: 2.5rem;
   font-weight: bold;
   color: $grey-mid;
   text-align: center;
+  padding: 15px 0;
+  border-bottom: 2px solid $grey-light;
+  margin: 0 10px 15px;
+
+  &:before {
+    content: " ";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    box-shadow: 0 2px 10px -10px rgba(0,0,0,0.2);
+
+  }
 }
 
+.article-wrapper{
+  float: left;
+  padding-top: 2px;
+  width: 320px;
+  height: 262px;
 
-article {
-  margin: 0 auto;
-  width: 290px;
-  height: 240px;
-  // background: $offwhite;
-  background: #EDEDED;
-  padding: 10px;
-  border: 1px solid #fff;
-  box-shadow: 0 2px 10px 2px rgba(0,0,0,0.2);
-
-  h2 {
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: $grey-mid;
-    text-align: center;
-    margin-bottom: 12px;   
-
-  }
-
-  .image {
-    background: url(http://lorempixel.com/266/86/);
-    height: 86px;
-    margin-bottom: 12px;
+  article {
+    width: 290px;
+    height: 240px;
+    margin: 2px 10px 18px;
+    background: $grey-light;
+    padding: 10px;
+    border: 1px solid #fff;
     box-shadow: 0 2px 10px 2px rgba(0,0,0,0.2);
 
-  }
+    transition-property: box-shadow, margin-top;
+    transition-duration: 0.25s, 0.25s;
 
-  p {
+    &:hover {
+      box-shadow: 0 2px 10px 2px rgba(0,0,0,0.4);
+      margin-top: 0;
+    }
 
+    h2 {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: $grey-mid;
+      text-align: center;
+      margin-bottom: 10px;   
+
+    }
+
+    .image {
+      background: url(http://lorempixel.com/266/86/cats) no-repeat;
+      background-size: cover;
+      height: 86px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 10px 2px rgba(0,0,0,0.2);
+
+    }
+
+    .content {
+      height: 84px;
+      overflow: hidden;
+
+      p {
+        line-height: 1.25;
+        text-align: justify;
+      }
+    }
   }
 }
