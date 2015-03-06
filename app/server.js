@@ -9,10 +9,12 @@ mongoose.connect('mongodb://localhost/newsfeed');
 var Schema = mongoose.Schema;
 
 var articleSchema = new Schema ({
-  title : String,
-  description : String,
-  is_done : Boolean,
-  created_at : Date
+  title : {type: String, trim: true, require: true},
+  client : {type: String, trim: true, require: true},
+  project_url : {type: String, trim: true, require: true},
+  completion_date : Date,
+  share : String,
+  created_at : {type: Date, default : Date.now}
 });
 
 var Article = mongoose.model('article', articleSchema);
