@@ -4,7 +4,7 @@ head
   meta(charset="UTF-8")
   title New
 body
-  form
+  form(action="/admin/article/new", method="POST")
     fieldset
       div.admin-article-title Title
         label(for="article-title-input")
@@ -17,7 +17,7 @@ body
         input#article-project-url-input(type="text", name="article-project-url")
       div.admin-article-image-url Image URL
         label(for="article-image-url-input")
-        input#article-image-url-input(type="text", name="article-project-url")
+        input#article-image-url-input(type="text", name="article-image-url")
       div.admin-article-content Content
         label(for="article-content-input")
         textarea#article-content-input(name="article-content", cols="30", rows="10")
@@ -27,6 +27,6 @@ body
       div.admin-article-share Share
         label(for="admin-article-share-input")
         input#article-share-input(type="text", name="article-share")
+      button Submit
 
 
-  
