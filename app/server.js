@@ -64,7 +64,9 @@ app.get('/admin/article/new', function (req, res) {
 });
 
 // display a preview of article
-app.get('/admin/article/')
+app.get('/admin/article/show', function (req, res) {
+  
+});
 
 
 
