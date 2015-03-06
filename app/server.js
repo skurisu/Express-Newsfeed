@@ -100,15 +100,53 @@ app.get('/admin/article/list', function (req, res) {
   });
 });
 
-// admin edit article
-app.put('/admin/article/:id', function (req, res) {
+// admin edit page
+app.get('/admin/article/edit/:id', function (req, res) {
   var article_id = req.params.id;
+
+  Article.findById(article_id, function (err, article) {
+    res.render('admin/edit', {
+      article : article
+    });
+  });
+});
+
+// admin update edit article
+app.put('/admin/article/edit/:id', function (req, res) {
+  var article_id = req.params.id;
+  var title = req.body["article-title"];
+  var client = req.body["article-client"];
+  var projectUrl = req.body["article-project-url"];
+  var imageUrl = req.body["article-image-url"];
+  var content = req.body["article-content"];
+  var completionDate = req.body["article-completion-date"];
+  var share = req.body["article-share"];
+
+  Article.findById(article_id, function (err, article) {
+    article.update({
+      $set : {
+        title : title,
+        client : client,
+        projectUrl : projectUrl,
+        imageUrl : imageUrl,
+        content : content
+      }
+    }, function (err) {
+      if (err) throw err;
+      res.redirect('/admin/article/list');
+    });
+  });
 });
 
 // admin delete article
-app.delete('/admin/article/:id', function (req, res) {
+app.delete('/admin/article/edit/:id', function (req, res) {
   var article_id = req.params.id;
   
+  Article.findById(article_id, function (err, article) {
+    article.remove(function () {
+      res.redirect('/admin/article/list');
+    });
+  });
 });
 
 
