@@ -11,10 +11,12 @@ var Schema = mongoose.Schema;
 var articleSchema = new Schema ({
   title : {type: String, trim: true, require: true},
   client : {type: String, trim: true, require: true},
-  project_url : {type: String, trim: true, require: true},
-  completion_date : Date,
+  projectUrl : {type: String, trim: true, require: true},
+  imageUrl : String,
+  content : String,
+  completionDate : Date,
   share : String,
-  created_at : {type: Date, default : Date.now}
+  createdAt : {type: Date, default : Date.now}
 });
 
 var Article = mongoose.model('article', articleSchema);
@@ -59,7 +61,7 @@ app.post('/admin/article/new', function (req, res) {
 
 // display new article template
 app.get('/admin/article/new', function (req, res) {
-  
+  res.render('admin/new');
 });
 
 // display a preview of article
@@ -67,11 +69,21 @@ app.get('/admin/article/show', function (req, res) {
   
 });
 
+// list of created articles (view for editing)
+app.get('/admin/article/list', function (req, res) {
+  
+});
 
+// admin edit article
+app.put('/admin/article/:id', function (req, res) {
+  var article_id = req.params.id;
+});
 
-
-
-
+// admin delete article
+app.delete('/admin/article/:id', function (req, res) {
+  var article_id = req.params.id;
+  
+});
 
 
 
