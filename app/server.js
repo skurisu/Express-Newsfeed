@@ -31,9 +31,8 @@ app.set('view engine', 'jade');
 
 // display full list of articles
 app.get('/', function (req, res) {
-  res.render('articles/list', {
-    articles : articles
-  });
+  
+  res.render('articles/list');
 });
 
 // display individual article + details
