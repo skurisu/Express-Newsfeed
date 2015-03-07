@@ -1,23 +1,13 @@
-doctype
-html(lang="en")
-head
-  meta(charset="UTF-8")
-  title New
-body
+extends ../layouts/admin_layout.jade
+
+block content
   each article in articles
     .wrapper
-      div= article.title
-      div= article.client
-      div= article.projectUrl
-      div= article.imageUrl
-      div!= article.content
-      div= article.completionDate
-      div= article.share
-      form(action="/admin/article/edit/#{article._id}")
-        button Edit
-      form(action="/admin/article/edit/#{article._id}?_method=DELETE", method="POST")
-        button Delete
-
-
-
-  
+      ul
+        li
+          span.title= article.title
+          a(href="/articles/#{article._id}/edit")
+            button Edit
+          form(action="/articles/#{article._id}?_method=DELETE", method="POST")
+            button Delete
+            

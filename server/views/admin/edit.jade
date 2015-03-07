@@ -4,7 +4,7 @@ head
   meta(charset="UTF-8")
   title New
 body
-  form(action="/admin/article/edit/#{article._id}?_method=PUT", method="POST")
+  form(action="/articles/#{article._id}/edit?_method=PUT", method="POST")
     fieldset
       div.admin-article-title Title
         label(for="article-title-input")

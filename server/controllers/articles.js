@@ -1,7 +1,11 @@
 var express = require('express');
 var Article = require('../models/article');
+var router  = express.Router();
 
-var router = express.Router();
+function ensureAuthenticated (req, res, next) {
+  if (req.isAuthenticated()) {return next();}
+  res.redirect('/login');
+}
 
 // Unauthenticated Routes
 router.list = function (req, res) {
@@ -20,46 +24,45 @@ router.show = function (req, res) {
 };
 
 // Authenticated Routes
+// post to article form page
+router.post('/new', ensureAuthenticated, function (req, res) {
 
-// // post to article form page
-// router.post('/admin/article/new', function (req, res) {
+  var title = req.body["article-title"];
+  var client = req.body["article-client"];
+  var projectUrl = req.body["article-project-url"];
+  var imageUrl = req.body["article-image-url"];
+  var content = req.body["article-content"];
+  var completionDate = req.body["article-completion-date"];
+  var share = req.body["article-share"];
 
-//   var title = req.body["article-title"];
-//   var client = req.body["article-client"];
-//   var projectUrl = req.body["article-project-url"];
-//   var imageUrl = req.body["article-image-url"];
-//   var content = req.body["article-content"];
-//   var completionDate = req.body["article-completion-date"];
-//   var share = req.body["article-share"];
+  var article = new Article({
+    title : title,
+    client : client,
+    projectUrl : projectUrl,
+    imageUrl : imageUrl,
+    content : content,
+    completionDate : completionDate,
+    share : share
+  });
 
-//   var article = new Article({
-//     title : title,
-//     client : client,
-//     projectUrl : projectUrl,
-//     imageUrl : imageUrl,
-//     content : content,
-//     completionDate : completionDate,
-//     share : share
-//   });
+  article.save(function (err) {
+    if (err) throw err;
+    res.redirect('/articles/admin');
+  });
+});
 
-//   article.save(function (err) {
-//     if (err) throw err;
-//     res.redirect('/admin/article/list');
-//   });
-// });
-
-// // display new article form
-// router.get('/admin/article/new', function (req, res) {
-//   res.render('admin/new');
-// });
+// display new article form
+router.get('/new', ensureAuthenticated, function (req, res) {
+  res.render('admin/new');
+});
 
 // // display a preview of article
-// router.get('/admin/article/show', function (req, res) {
+// router.get('/articles/admin/article/show', function (req, res) {
   
 // });
 
 // list of created articles (view for editing)
-router.get('/list', function (req, res) {
+router.get('/admin', ensureAuthenticated, function (req, res) {
   Article.find(function (err, articles) {
     if (err) throw err;
     console.log(articles);
@@ -68,7 +71,7 @@ router.get('/list', function (req, res) {
 });
 
 // admin edit page
-router.get('/admin/article/edit/:id', function (req, res) {
+router.get('/:id/edit', ensureAuthenticated, function (req, res) {
   var article_id = req.params.id;
 
   Article.findById(article_id, function (err, article) {
@@ -78,42 +81,42 @@ router.get('/admin/article/edit/:id', function (req, res) {
   });
 });
 
-// // admin update edit article
-// router.put('/admin/article/edit/:id', function (req, res) {
-//   var article_id = req.params.id;
-//   var title = req.body["article-title"];
-//   var client = req.body["article-client"];
-//   var projectUrl = req.body["article-project-url"];
-//   var imageUrl = req.body["article-image-url"];
-//   var content = req.body["article-content"];
-//   var completionDate = req.body["article-completion-date"];
-//   var share = req.body["article-share"];
+// admin update edit article
+router.put('/:id/edit', ensureAuthenticated, function (req, res) {
+  var article_id = req.params.id;
+  var title = req.body["article-title"];
+  var client = req.body["article-client"];
+  var projectUrl = req.body["article-project-url"];
+  var imageUrl = req.body["article-image-url"];
+  var content = req.body["article-content"];
+  var completionDate = req.body["article-completion-date"];
+  var share = req.body["article-share"];
 
-//   Article.findById(article_id, function (err, article) {
-//     article.update({
-//       $set : {
-//         title : title,
-//         client : client,
-//         projectUrl : projectUrl,
-//         imageUrl : imageUrl,
-//         content : content
-//       }
-//     }, function (err) {
-//       if (err) throw err;
-//       res.redirect('/admin/article/list');
-//     });
-//   });
-// });
+  Article.findById(article_id, function (err, article) {
+    article.update({
+      $set : {
+        title : title,
+        client : client,
+        projectUrl : projectUrl,
+        imageUrl : imageUrl,
+        content : content
+      }
+    }, function (err) {
+      if (err) throw err;
+      res.redirect('/articles/admin');
+    });
+  });
+});
 
-// // admin delete article
-// router.delete('/admin/article/edit/:id', function (req, res) {
-//   var article_id = req.params.id;
+// admin delete article
+router.delete('/:id', ensureAuthenticated, function (req, res) {
+  var article_id = req.params.id;
   
-//   Article.findById(article_id, function (err, article) {
-//     article.remove(function () {
-//       res.redirect('/admin/article/list');
-//     });
-//   });
-// });
+  Article.findById(article_id, function (err, article) {
+    article.remove(function () {
+      res.redirect('/articles/admin');
+    });
+  });
+});
 
 module.exports = router;
