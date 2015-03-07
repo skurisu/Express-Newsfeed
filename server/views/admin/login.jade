@@ -1,0 +1,9 @@
+extends ../layouts/admin_layout.jade
+
+block content
+  h1 Login Form
+  form(action="/login", method="POST")
+    fieldset
+      input(type="text", name="username", placeholder="User Name")
+      input(type="password", name="password", placeholder="Password")
+      button Login

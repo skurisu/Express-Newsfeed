@@ -1,0 +1,13 @@
+extends ../layouts/admin_layout.jade
+
+block content
+  each article in articles
+    .wrapper
+      ul
+        li
+          span.title= article.title
+          a(href="/articles/#{article._id}/edit")
+            button Edit
+          form(action="/articles/#{article._id}?_method=DELETE", method="POST")
+            button Delete
+            
