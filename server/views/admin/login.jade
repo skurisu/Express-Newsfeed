@@ -1,10 +1,16 @@
 extends ../layouts/admin_layout.jade
 
 block content
-  form.form-signin(action="/login", method="POST")
-    h2.form-signin-heading Please log in
-    label.sr-only(for="username") User name  
-    input#username.form-control(type="text", name="username", placeholder="User Name", required, autofocus)
-    label.sr-only(for="password") Password
-    input#password.form-control(type="password", name="password", placeholder="Password", required)
-    button.btn.btn-lg.btn-primary.btn-block(type="submit") Login
+  nav.navbar.navbar-inverse.navbar-fixed-top
+    .container
+      .navbar-header
+        a.navbar-brand(href="#") Articleater Admin
+
+  .wrapper
+    form.form-signin(action="/login", method="POST")
+      h2.form-signin-heading Please log in
+      label.sr-only(for="username") User name  
+      input#username.form-control(type="text", name="username", placeholder="User Name", required, autofocus)
+      label.sr-only(for="password") Password
+      input#password.form-control(type="password", name="password", placeholder="Password", required)
+      button.btn.btn-lg.btn-primary.btn-block(type="submit") Login

@@ -91,10 +91,12 @@ h1 {
       color: #868686;
       text-align: center;
       margin-bottom: 10px; }
-    .article-wrapper article .image {
-      background: url(http://lorempixel.com/266/86/cats) no-repeat;
-      background-size: cover;
+    .article-wrapper article img {
+      max-width: 100%;
+      height: auto; }
+    .article-wrapper article .article-image {
       height: 86px;
+      overflow: hidden;
       margin-bottom: 10px;
       box-shadow: 0 2px 10px 2px rgba(0, 0, 0, 0.2); }
     .article-wrapper article .content {
