@@ -1,31 +1,66 @@
-doctype
-html(lang="en")
-head
-  meta(charset="UTF-8")
-  title New
-body
-  form(action="/articles/#{article._id}/edit?_method=PUT", method="POST")
-    fieldset
-      div.admin-article-title Title
-        label(for="article-title-input")
-        input#article-title-input(type="text", name="article-title", value="#{article.title}")
-      div.admin-article-client Client
-        label(for="article-client-input")
-        input#article-client-input(type="text", name="article-client", value="#{article.client}")
-      div.admin-article-project-url Project URL
-        label(for="article-project-url-input")
-        input#article-project-url-input(type="text", name="article-project-url", value="#{article.projectUrl}")
-      div.admin-article-image-url Image URL
-        label(for="article-image-url-input")
-        input#article-image-url-input(type="text", name="article-image-url", value="#{article.imageUrl}")
-      div.admin-article-content Content
-        label(for="article-content-input")
-        textarea#article-content-input(name="article-content", cols="30", rows="10")= article.content
-      div.admin-article-completion-date Completion Date
-        label(for="article-completion-date-input")
-        input#article-completion-date-input(type="text", name="article-completion-date", value="#{article.completionDate}")
-      div.admin-article-share Share
-        label(for="admin-article-share-input")
-        input#article-share-input(type="text", name="article-share", value="#{article.share}")
-      button Update
+extends ../layouts/admin_layout.jade
 
+block content
+  nav.navbar.navbar-inverse.navbar-fixed-top
+    .container
+      .navbar-header
+        button(type="button", class="navbar-toggle collapsed", data-toggle="collapse", data-target="#navbar", aria-expanded="false", aria-controls="navbar") 
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+          
+        a.navbar-brand(href="/articles/admin") Articleater Admin
+      
+      div#navbar(class="navbar-collapse collapse") 
+        ul.nav.navbar-nav
+          li
+            a(href="/articles/admin") Show Articles
+          li
+            a(href="/articles/new") New Article
+        form.navbar-form.navbar-right
+          a.btn.btn-warning(href="/logout") Sign Out
+
+  .wrapper
+    .row
+      .col-sm-3
+        h2.form-title Edit Article
+      .col-sm-9
+        h2= article._id
+    form(action="/articles/#{article._id}/edit?_method=PUT", method="POST", class="form-horizontal")
+      .form-group
+        label(for="article-title-input", class="col-sm-3") Article Title
+        .col-sm-9
+          input#article-title-input(type="text", name="articleTitle", class="form-control", placeholder="Article title", value="#{article.title}", required, autofocus)
+      .form-group
+        label(for="article-client-input", class="col-sm-3") Client
+        .col-sm-9
+          input#article-client-input(type="text", name="articleClient", class="form-control", placeholder="Client", value="#{article.client}", required)
+      .form-group
+        label(for="article-creative-fields-input", class="col-sm-3") Creative Fields
+        .col-sm-9
+          input#article-creative-fields-input(type="text", name="articleCreativeFields", class="form-control", placeholder="Creative fields", value="#{article.creativeFields}")
+      .form-group
+        label(for="article-project-url-input", class="col-sm-3") Project Url
+        .col-sm-9
+          input#article-project-url-input(type="text", name="articleProjectUrl", class="form-control", placeholder="Article project URL", value="#{article.projectUrl}")
+      .form-group
+        label(for="article-image-url", class="col-sm-3") Article Image
+        .col-sm-9
+          input#article-image-url(type="text", name="articleImageUrl", class="form-control", placeholder="Article image URL", value="#{article.imageUrl}", required)
+      .form-group
+        label(for="article-content-input", class="col-sm-3") Article Content
+        .col-sm-9
+          textarea#article-content-input(name="articleContent", class="form-control", row="6", placeholder="Article content...")= article.content
+      .form-group
+        label(for="article-completion-date-input", class="col-sm-3") Completion Date
+        .col-sm-9
+          input#article-completion-date-input(type="date", name="articleCompletionDate", class="form-control", placeholder="Completion date", value="#{article.completionDate}")
+      .form-group
+        label(for="article-share-input", class="col-sm-3") Share
+        .col-sm-9
+          input#article-share-input(type="text", name="articleShare", class="form-control", placeholder="Article share", value="#{article.share}")
+      .form-group
+        .col-sm-offset-3.col-sm-9
+          button.btn.btn-primary.btn-lg Update Article
+          a.btn.btn-danger.btn-lg.pull-right(href="/articles/admin") Cancel

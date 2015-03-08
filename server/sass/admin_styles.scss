@@ -103,6 +103,29 @@ h2 {
   }
 }
 
+.form-title {
+  text-align: right;
+  padding-bottom: 15px;
+}
+
 .table {
   background: #92959b;
+
+  th {
+    font-size: 1.4rem;
+    font-weight: bold;
+  }
+}
+
+
+
+.edit-button {
+
+  .btn {
+    margin-right: 5px;
+  }
+}
+
+.delete-button {
+  display: inline;
 }
