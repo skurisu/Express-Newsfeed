@@ -4,7 +4,7 @@ block content
   h1 Articleater
 
   each article in articles
-    .article-wrapper
+    a.article-wrapper(href="/#{article._id}")
       article
         .image(style="background-image: url(#{article.imageUrl})")
         h2= article.title
