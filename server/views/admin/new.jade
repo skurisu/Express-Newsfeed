@@ -22,15 +22,22 @@ block content
           a.btn.btn-warning(href="/logout") Sign Out
 
   .wrapper
+    .row
+      .col-sm-3
+        h2.form-title New Article
     form(action="/articles/new", method="POST", class="form-horizontal")
       .form-group
         label(for="article-title-input", class="col-sm-3") Article Title
         .col-sm-9
-          input#article-title-input(type="text", name="articleTitle", class="form-control", placeholder="Article title")
+          input#article-title-input(type="text", name="articleTitle", class="form-control", placeholder="Article title", required, autofocus)
       .form-group
         label(for="article-client-input", class="col-sm-3") Client
         .col-sm-9
-          input#article-client-input(type="text", name="articleClient", class="form-control", placeholder="Client")
+          input#article-client-input(type="text", name="articleClient", class="form-control", placeholder="Client", required)
+      .form-group
+        label(for="article-creative-fields-input", class="col-sm-3") Creative Fields
+        .col-sm-9
+          input#article-creative-fields-input(type="text", name="articleCreativeFields", class="form-control", placeholder="Creative fields")
       .form-group
         label(for="article-project-url-input", class="col-sm-3") Project Url
         .col-sm-9
@@ -38,7 +45,7 @@ block content
       .form-group
         label(for="article-image-url", class="col-sm-3") Article Image
         .col-sm-9
-          input#article-image-url(type="text", name="articleImageUrl", class="form-control", placeholder="Article image URL")
+          input#article-image-url(type="text", name="articleImageUrl", class="form-control", placeholder="Article image URL", required)
       .form-group
         label(for="article-content-input", class="col-sm-3") Article Content
         .col-sm-9
