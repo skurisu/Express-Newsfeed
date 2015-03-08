@@ -6,6 +6,7 @@ block content
   each article in articles
     a.article-wrapper(href="/#{article._id}")
       article
-        .image(style="background-image: url(#{article.imageUrl})")
+        .article-image
+          img(src="#{article.imageUrl}")
         h2= article.title
         .content!= article.content

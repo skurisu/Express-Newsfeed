@@ -27,13 +27,13 @@ router.show = function (req, res) {
 // post to article form page
 router.post('/new', ensureAuthenticated, function (req, res) {
 
-  var title = req.body["article-title"];
-  var client = req.body["article-client"];
-  var projectUrl = req.body["article-project-url"];
-  var imageUrl = req.body["article-image-url"];
-  var content = req.body["article-content"];
-  var completionDate = req.body["article-completion-date"];
-  var share = req.body["article-share"];
+  var title = req.body.articleTitle;
+  var client = req.body.articleClient;
+  var projectUrl = req.body.articleProjectUrl;
+  var imageUrl = req.body.articleImageUrl;
+  var content = req.body.articleContent;
+  var completionDate = req.body.articleCompletionDate;
+  var share = req.body.articleShare;
 
   var article = new Article({
     title : title,
@@ -47,6 +47,7 @@ router.post('/new', ensureAuthenticated, function (req, res) {
 
   article.save(function (err) {
     if (err) throw err;
+    console.log('new article added', article);
     res.redirect('/articles/admin');
   });
 });
@@ -84,13 +85,13 @@ router.get('/:id/edit', ensureAuthenticated, function (req, res) {
 // admin update edit article
 router.put('/:id/edit', ensureAuthenticated, function (req, res) {
   var article_id = req.params.id;
-  var title = req.body["article-title"];
-  var client = req.body["article-client"];
-  var projectUrl = req.body["article-project-url"];
-  var imageUrl = req.body["article-image-url"];
-  var content = req.body["article-content"];
-  var completionDate = req.body["article-completion-date"];
-  var share = req.body["article-share"];
+  var title = req.body.articleTitle;
+  var client = req.body.articleClient;
+  var projectUrl = req.body.articleProjectUrl;
+  var imageUrl = req.body.articleImageUrl;
+  var content = req.body.articleContent;
+  var completionDate = req.body.articleCompletionDate;
+  var share = req.body.articleShare;
 
   Article.findById(article_id, function (err, article) {
     article.update({

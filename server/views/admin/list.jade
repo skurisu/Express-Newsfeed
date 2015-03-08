@@ -1,13 +1,56 @@
 extends ../layouts/admin_layout.jade
 
 block content
-  each article in articles
-    .wrapper
-      ul
-        li
-          span.title= article.title
-          a(href="/articles/#{article._id}/edit")
-            button Edit
-          form(action="/articles/#{article._id}?_method=DELETE", method="POST")
-            button Delete
-            
+  nav.navbar.navbar-inverse.navbar-fixed-top
+    .container
+      .navbar-header
+        button(type="button", class="navbar-toggle collapsed", data-toggle="collapse", data-target="#navbar", aria-expanded="false", aria-controls="navbar") 
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+          
+        a.navbar-brand(href="/articles/admin") Articleater Admin
+      
+      div#navbar(class="navbar-collapse collapse") 
+        ul.nav.navbar-nav
+          li.active
+            a(href="/articles/admin") Show Articles
+          li
+            a(href="/articles/new") New Article
+        form.navbar-form.navbar-right
+          a.btn.btn-warning(href="/logout") Sign Out
+  .wrapper
+    table.table.table-striped.table-bordered.table-condensed
+      thead
+        tr
+          th Article title
+          th Image URL
+      tbody
+        each article in articles
+          tr
+            td.col-sm-5= article.title
+            td.col-sm-5= article.imageUrl
+            td.col-sm-2
+              a(href="/articles/#{article._id}/edit")
+                button.btn.btn-warning
+                  span.glyphicon.glyphicon-pencil
+              form(action="/articles/#{article._id}?_method=DELETE", method="POST")
+                button.btn.btn-danger
+                  span.glyphicon.glyphicon-trash
+    //- ul.list-group
+    //-   each article in articles
+    //-     li.list-group-item
+    //-       span.title= article.title
+    //-       .btn-group
+    //-         a(href="/articles/#{article._id}/edit")
+    //-           button.btn.btn-warning
+    //-             i.glyphicon.glyphicon-pencil
+    //-         form(action="/articles/#{article._id}?_method=DELETE", method="POST")
+    //-           button.btn.btn-danger
+    //-             i.glyphicon.glyphicon-trash
+    a(href="/articles/new")
+      button.btn.btn-primary.btn-lg New Article 
+        span.glyphicon.glyphicon-plus
+
+
