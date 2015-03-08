@@ -29,6 +29,7 @@ router.post('/new', ensureAuthenticated, function (req, res) {
 
   var title = req.body.articleTitle;
   var client = req.body.articleClient;
+  var creativeFields = req.body.articleCreativeFields;
   var projectUrl = req.body.articleProjectUrl;
   var imageUrl = req.body.articleImageUrl;
   var content = req.body.articleContent;
@@ -38,6 +39,7 @@ router.post('/new', ensureAuthenticated, function (req, res) {
   var article = new Article({
     title : title,
     client : client,
+    creativeFields: creativeFields,
     projectUrl : projectUrl,
     imageUrl : imageUrl,
     content : content,
@@ -87,6 +89,7 @@ router.put('/:id/edit', ensureAuthenticated, function (req, res) {
   var article_id = req.params.id;
   var title = req.body.articleTitle;
   var client = req.body.articleClient;
+  var creativeFields = req.body.articleCreativeFields;
   var projectUrl = req.body.articleProjectUrl;
   var imageUrl = req.body.articleImageUrl;
   var content = req.body.articleContent;
@@ -98,6 +101,7 @@ router.put('/:id/edit', ensureAuthenticated, function (req, res) {
       $set : {
         title : title,
         client : client,
+        creativeFields : creativeFields,
         projectUrl : projectUrl,
         imageUrl : imageUrl,
         content : content

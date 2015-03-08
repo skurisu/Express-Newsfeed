@@ -5,8 +5,9 @@ var Schema = mongoose.Schema;
 var articleSchema = new Schema ({
   title : {type: String, trim: true, require: true},
   client : {type: String, trim: true, require: true},
-  projectUrl : {type: String, trim: true, require: true},
-  imageUrl : String,
+  creativeFields: {type: String, trim: true},
+  projectUrl : String,
+  imageUrl : {type: String, trim: true, require: true},
   content : String,
   completionDate : Date,
   share : String,

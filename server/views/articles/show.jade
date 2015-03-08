@@ -1,4 +1,27 @@
 extends ../layouts/layout.jade
 
 block content
-  h1 Articleater
+  .article-wrapper
+    h1 Articleater
+    .slide-arrow slide-arrow here
+    .article 
+      h2 Event Invitation
+      .detail-wrapper
+        //- .creative
+        //-   h3 Creative Fields
+        //-   p= article.creativeFields
+        .client
+          h3 Client 
+          p= article.client
+        .project-url
+          h3 Project URL
+          p= article.projectUrl
+        .completion-date
+          h3 Completion Date
+          p= article.completionDate
+        .content
+          h3 Content 
+          p!= article.content
+        .image
+          img(src="#{article.imageUrl}")  
+
